@@ -30,7 +30,7 @@ function App() {
   const { t, i18n } = useTranslation();
 
   const [dateAndTime, setDateAndTime] = useState("");
-  const locations = ['Cairo','Alexandria', 'Istanbul', 'London', 'Tokyo', 'New York', 'Berlin', 'Paris', 'Dubai', 'Rome'];
+  const locations = ['Cairo', 'Alexandria', 'Istanbul', 'London', 'Tokyo', 'New York', 'Berlin', 'Paris', 'Dubai', 'Rome'];
   const [selectedLocation, setSelectedLocation] = useState(locations[0]);
   const [temp, setTemp] = useState({
     number: null,
@@ -58,7 +58,7 @@ function App() {
 
   useEffect(() => {
     i18n.changeLanguage(locale); // Set the language to Arabic
-  },[])
+  }, [])
 
   useEffect(() => {
 
@@ -112,91 +112,100 @@ function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-evenly'}}>
-        <PopupState variant="popover" popupId="demo-popup-menu">
-          {(popupState) => (
-            <>
-              <Button variant="contained" {...bindTrigger(popupState)} style={{ outline: 'none', background: '#ffffff', color: '#3683d4ff', padding: '12px 34px'}}>
-                {t(selectedLocation)}
-              </Button>
-              <Menu {...bindMenu(popupState)} style={{ maxHeight: '250px', overflowY: 'scroll', scrollbarColor: '#3683d4ff #ffffff', scrollbarWidth: 'thin' }}>
-                {locations.map((location) =>
-                  <MenuItem
-                    style={{color: '#3683d4ff'}}
-                    key={location}
-                    onClick={() => {
-                      setSelectedLocation(location);
-                      popupState.close();
-                    }}
-                  >
-                    {t(location)}
-                  </MenuItem>
-                )}
-              </Menu>
-            </>
-          )}
-        </PopupState>
-        <Container maxWidth="sm" >
-          {/* Content Container */}
-          <div style={{ height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-            {/* Card */}
-            <div dir={locale == "ar" ? "rtl" : "ltr"} style={{ background: '#3683d4ff', color: '#ffffff', padding: '20px', borderRadius: '16px', boxShadow: '0px 8px 1px rgba(0,0,0,0.05)', width: '100%' }}>
-              {/* Content */}
-              <div >
-                {/* City & Time */}
-                <div style={{ display: 'flex', alignItems: 'end', justifyContent: 'start' }}>
-                  <Typography variant="h2" style={{ color: '#ffffff', marginLeft: '20px' }}>
-                    {temp.name ? t(temp.name) : 'Loading...'}
-                    {/* {t('weather.in')} */}
-                  </Typography>
-                  <Typography variant="h4" style={{ color: '#ffffff', marginLeft: '20px' }}>
-                    {loading ? 'Loading...' : dateAndTime}
-                  </Typography>
-                </div>
-
-                <hr />
-
-                {/* Container of Degree & Cloud icon */}
-                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '20px' }}>
-                  {/* Degree & Discription */}
-                  <div>
-                    {/* Temprature */}
-                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                      <Typography variant="h2" component="h1" style={{}}>
-                        {temp.number !== null ? `${temp.number}°C` : 'Loading...'}
-                      </Typography>
-
-                      <img src={temp.icon} alt={temp.description} />
-                    </div>
-
-                    <Typography variant="h6" component="h5" style={{}}>
-                      {locale === 'en' ? temp.description.charAt(0).toUpperCase() + temp.description.slice(1) : t(temp.description)}
-                      {/* {temp.description ? t(temp.description).charAt(0).toUpperCase() + temp.description.slice(1) : 'Loading...'} */}
+        <div style={{ maxHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-evenly' }}>
+          <Typography variant="h2" style={{ margin: '10px 0 10px 0', color: '#3683d4ff', fontWeight: 800, letterSpacing: 1, textAlign: 'center' }}>
+            {t("Weather App")}
+          </Typography>
+          <Typography variant="p" style={{ marginBottom: '16px', color: '#3683d4ff', textAlign: 'center' }}>
+            {t("Choose a location : ")}
+          </Typography>
+          <PopupState variant="popover" popupId="demo-popup-menu">
+            {(popupState) => (
+              <>
+                <Button variant="contained" {...bindTrigger(popupState)} style={{ marginBottom: '32px', outline: 'none', background: '#ffffff', color: '#3683d4ff', padding: '12px 34px' }}>
+                  {t(selectedLocation)}
+                </Button>
+                <Menu
+                  {...bindMenu(popupState)}
+                  MenuListProps={{ style: { maxHeight: 250, overflowY: 'auto' } }}
+                >
+                  {locations.map((location) =>
+                    <MenuItem
+                      style={{ color: '#3683d4ff' }}
+                      key={location}
+                      onClick={() => {
+                        setSelectedLocation(location);
+                        popupState.close();
+                      }}
+                    >
+                      {t(location)}
+                    </MenuItem>
+                  )}
+                </Menu>
+              </>
+            )}
+          </PopupState>
+          <Container maxWidth="sm" >
+            {/* Content Container */}
+            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+              {/* Card */}
+              <div dir={locale == "ar" ? "rtl" : "ltr"} style={{ background: '#3683d4ff', color: '#ffffff', padding: '20px', borderRadius: '16px', boxShadow: '0px 8px 1px rgba(0,0,0,0.05)', width: '100%' }}>
+                {/* Content */}
+                <div >
+                  {/* City & Time */}
+                  <div style={{ display: 'flex', alignItems: 'end', justifyContent: 'start' }}>
+                    <Typography variant="h2" style={{ color: '#ffffff', marginLeft: '20px' }}>
+                      {temp.name ? t(temp.name) : 'Loading...'}
+                      {/* {t('weather.in')} */}
                     </Typography>
-
-                    {/* Min & Max */}
-                    <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '10px', alignItems: 'center' }}>
-                      <h4>{t("Min")} : {temp.min}°C</h4>
-                      <h4 style={{ margin: '0px 8px' }}>|</h4>
-                      <h4>{t("Max")} : {temp.max}°C</h4>
-                    </div>
+                    <Typography variant="h4" style={{ color: '#ffffff', marginLeft: '20px' }}>
+                      {loading ? 'Loading...' : dateAndTime}
+                    </Typography>
                   </div>
 
-                  {/* Icon */}
-                  <CloudIcon style={{ fontSize: '200px', color: 'ffffff' }} />
+                  <hr />
+
+                  {/* Container of Degree & Cloud icon */}
+                  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '20px' }}>
+                    {/* Degree & Discription */}
+                    <div>
+                      {/* Temprature */}
+                      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        <Typography variant="h2" component="h1" style={{}}>
+                          {temp.number !== null ? `${temp.number}°C` : 'Loading...'}
+                        </Typography>
+
+                        <img src={temp.icon} alt={temp.description} />
+                      </div>
+
+                      <Typography variant="h6" component="h5" style={{}}>
+                        {locale === 'en' ? temp.description.charAt(0).toUpperCase() + temp.description.slice(1) : t(temp.description)}
+                        {/* {temp.description ? t(temp.description).charAt(0).toUpperCase() + temp.description.slice(1) : 'Loading...'} */}
+                      </Typography>
+
+                      {/* Min & Max */}
+                      <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '10px', alignItems: 'center' }}>
+                        <h4>{t("Min")} : {temp.min}°C</h4>
+                        <h4 style={{ margin: '0px 8px' }}>|</h4>
+                        <h4>{t("Max")} : {temp.max}°C</h4>
+                      </div>
+                    </div>
+
+                    {/* Icon */}
+                    <CloudIcon style={{ fontSize: '200px', color: 'ffffff' }} />
+                  </div>
                 </div>
               </div>
-            </div>
-            {/* Card */}
+              {/* Card */}
 
-            {/* Translation Container */}
-            <div dir={locale == "ar" ? "rtl" : "ltr"} style={{ display: 'flex', justifyContent: 'end', width: '100%', marginTop: '20px' }}>
-              <Button variant="text" style={{ background: '#ffffff', outline: 'none' }} onClick={handleLanguageClick}>
-                {locale === 'en' ? 'Arabic' : 'إنجليزي'}
+              {/* Translation Container */}
+              <div dir={locale == "ar" ? "rtl" : "ltr"} style={{ display: 'flex', justifyContent: 'end', width: '100%', marginTop: '20px' }}>
+                <Button variant="text" style={{ background: '#ffffff', outline: 'none' }} onClick={handleLanguageClick}>
+                  {locale === 'en' ? 'Arabic' : 'إنجليزي'}
                 </Button>
+              </div>
             </div>
-          </div>
-        </Container>
+          </Container>
         </div>
       </ThemeProvider>
     </>
