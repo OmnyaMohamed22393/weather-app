@@ -1,0 +1,25 @@
+{
+    "weather.in": "في الطقس ",
+    "Min": "الصغري",
+    "Max": "العظمي",
+    "clear sky": "سماء صافية",
+    "few clouds": "غيوم قليلة",
+    "scattered clouds": "غيوم متفرقة",
+    "broken clouds": "غيوم متكسرة", 
+    "shower rain": "أمطار خفيفة",
+    "rain": "أمطار",
+    "thunderstorm": "عاصفة رعدية",
+    "snow": "ثلوج", 
+    "mist": "ضباب",
+    "Cairo": "القاهرة",
+    "Alexandria": "الإسكندرية",
+    "London": "لندن",
+    "Tokyo": "طوكيو",
+    "New York": "نيويورك",
+    "Berlin": "برلين",
+    "Paris": "باريس",
+    "Dubai": "دبي",
+    "Istanbul": "إسطنبول",
+    "Rome": "روما"
+
+}
