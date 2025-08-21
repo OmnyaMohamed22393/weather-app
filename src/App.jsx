@@ -112,7 +112,7 @@ function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <div style={{ maxHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-evenly' }}>
+        <div  dir={locale == "ar" ? "rtl" : "ltr"} style={{ maxHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-evenly' }}>
           <Typography variant="h2" style={{ margin: '10px 0 10px 0', color: '#3683d4ff', fontWeight: 800, letterSpacing: 1, textAlign: 'center' }}>
             {t("Weather App")}
           </Typography>
